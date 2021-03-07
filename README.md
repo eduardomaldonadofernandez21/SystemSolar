@@ -29,6 +29,8 @@ A partir de la función draw() llamaremos a una serie de funciones que explicamo
 
 -	**showPlanet():** Mediante una serie de parametros, se mostrará el planeta pasado entre ellos, así como se va comprobando si se ha hecho un giro completo de la orbita alrededor del sol llamando al método addAngOrbita().
 
+-	**showSatellite():** Mediante una serie de parametros, se mostrará el satelite de un planeta correspondiente.
+
 -	**addAngOrbita():** En caso de haber superado los 360 grados, se reseta el giro de la orbita para volver a empezar desde su posición desde 0º.
 
 -	**getAngOrbita():** Devuelve el angulo de la orbita actual de cada planeta correspondiente.
