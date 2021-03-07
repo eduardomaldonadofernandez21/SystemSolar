@@ -11,7 +11,7 @@ Se ha realizado un programa en processing que crear un prototipo del sistema sol
 
 ## Descripción
 Cuando se ejecuta el programa, se visualiza el sol como estrella principal en el medio del sistema y los planetas alrededor de esta estrella siguiendo la misma ubicación que en la realidad. Se ha añadido que la posición en el ejeY sea random de un cierto rango para mayor realismo. En cuanto a los planetas más cercanos al sol, giran a una velocidad de traslación mucho mayor respecto a otro más lejanos como pueden ser Neptuno o Júpiter.
-![Ejemplo de sólido de revolución](/example.gif "Ejemplo de sólido de revolución")
+![Sistema solar](/sistema_solar.gif "SystemSolar")
 
 ## Organización del código
 
