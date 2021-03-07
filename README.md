@@ -10,29 +10,28 @@ Autor: Eduardo Maldonado Fernández
 Se ha realizado un programa en processing que crear un prototipo del sistema solar con 6 planetas: Mercurio, Venus, La tierra, Marte, Júpiter, Neptuno y el propio sol como estrella en la que giran el resto de planetas nombrados. Además, se ha añadido varias lunas.
 
 ## Descripción
-Se ha hecho una pantalla inicial explicando los controles de como se dibujar el perfil del sólido y su posterior creación. Después, en el proceso de hacer el perfil del sólido, se ha dividido la pantalla a la mitad para que se pueda dibujar correctamente en el lado derecho. A continuación, cuando se crear el sólido de revolucion se muestra la figura y se puede mover a la vez que se mueve el mouse.
+Cuando se ejecuta el programa, se visualiza el sol como estrella principal en el medio del sistema y los planetas alrededor de esta estrella siguiendo la misma ubicación que en la realidad. Se ha añadido que la posición en el ejeY sea random de un cierto rango para mayor realismo. En cuanto a los planetas más cercanos al sol, giran a una velocidad de traslación mucho mayor respecto a otro más lejanos como pueden ser Neptuno o Júpiter.
 ![Ejemplo de sólido de revolución](/example.gif "Ejemplo de sólido de revolución")
 
 ## Organización del código
 
-<p style=”text-align: justify;”>Primero establecemos unas variables globales: declaramos unas variables booleanas que nos indicaran cuando se ha hecho el primer click derecho del ratón para empezar a recoger los puntos del perfil, una segunda variable booleana que nos avisa cuando se deba mostrar el sólido de revolución y otra variable booleanada que nos indica cuando se esta mostrando el menu de los controles.</p>
-Después, existe una variable que es un arraylist de <PVector> que se recogen todas las posiciones clickadas por el usuario para el perfil del sólido. Además de los PShape para mostrar el perfil del sólido de revolución y el propio solido.
+<p style=”text-align: justify;”>Primero establecemos unas variables globales: declaramos unas variables float que nos indicaran el angulo del planeta respecto al sol. Además, se añade unas variables para la posiciones de los planetas y PShape variables globales para cada planeta, así como para el fondo del sistema solar un PImage.</p>
 
-En la función setup() establecemos el tamaño de la pantalla, y diversos valores de las variables globales explicados anteriormente.
+En la función setup() establecemos el tamaño de la pantalla completa, y diversos valores de las variables globales explicados anteriormente y generamos los planetas correspondientes medianteo el método createPlanet() que se explicará a continuación.
 
 A partir de la función draw() llamaremos a una serie de funciones que explicamos su utilidad:
 
-- **drawControl():** Con este función, se mostrará el menú de controles e inicial donde se explica los controles de teclado para dibujar el sólido.
+- **drawControl():** Con este función, se mostrará el control edonde se explica como terminar la ejecución del programa.
 
--	**mousePressed():** Cuando se clicke tanto el click derecho como el izquierdo, esta función se llamara, en caso de que sea click derecho se va guardando los puntos escogidos por el usuario en la pantalla. Por el contrario si es el click izquierdo, se limpia el arraylist de las posiciones recogidas y se reinicia la pantalla.
+-	**createPlanet():** Este metodo llamado en el setup() genera crear un planeta correspondiente añadiendole su textura correspondiente.
 
--	**keyPressed():** Cuando se pulsa las teclas para mostrar el sólido de revolución (tecla 's' o tecla 'S') o el 'ENTER' para mostrar los controles o empezar a dibujar el perfil. 
+-	**showSol():** Mediante esta función, se muestra el sol. 
 
--	**drawPerfilSolido():** Se llama a los distintos métodos del Pshape del objPerfil y vamos dibujando el perfil con los puntos recogidos en el arraylist y lo mostramos por pantalla.
+-	**showPlanet():** Mediante una serie de parametros, se mostrará el planeta pasado entre ellos, así como se va comprobando si se ha hecho un giro completo de la orbita alrededor del sol llamando al método addAngOrbita().
 
--	**drawSolidoRevolucion():** Con esta función creamos el sólido de revolución, para ellos creamos una figura que nos dibuje los triangulos con "beginShape(TRIANGLE_STRIP), ahora tenemos que calcular la rotación de los puntos del perfil que estan en 2D para que sea 3D, por lo que es necesario recorrer todos los vertices del perfil y para cada uno de ellos calcularemos su posición desde 0º hasta 360º.
+-	**addAngOrbita():** En caso de haber superado los 360 grados, se reseta el giro de la orbita para volver a empezar desde su posición desde 0º.
 
--	**rotacionPoints():** Mediante esta función llamada anteriormente en la función drawSolidoRevolucion, recibe como parametros los puntos del perfil de un vertice y un angulo para desplazarse y calculamos para los puntos X e Z su valor correspondiente para ese angulo en 3D.
+-	**getAngOrbita():** Devuelve el angulo de la orbita actual de cada planeta correspondiente.
 
 ## Descarga e instalación
-Para poder probar este programa es necesario descargar el fichero drawFigure.pde
+Para poder probar este programa es necesario descargar el fichero sistema_solar.pde, así como la carpeta /data, para poder descargar todas las texturas necesarias para la ejecución.
