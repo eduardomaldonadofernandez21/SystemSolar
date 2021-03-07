@@ -1,17 +1,18 @@
 
-float ang,angMer, angVen, angTierra, angMarte, angJup, angNep, angLuna;
+float ang,angMer, angVen, angTierra, angMarte, angJup, angNep, angLuna, angEur, angGanimedes;
 float posYmercurio, posYvenus, posYtierra, posYmarte, posYjupiter, posYneptuno, posYluna;
-PShape sol, mercurio, venus, tierra, marte, jupiter, luna, neptuno;
+PShape sol, mercurio, venus, tierra, marte, jupiter, luna, neptuno, europa, ganimedes;
 PImage space;
 
 
 void setup()
 {
-  fullScreen(P3D);
+  size(1500,844,P3D);
+  surface.setResizable(true);
   stroke(0);
   space = loadImage("data/espacio.jpg");
   //Inicializamos el PShape del sol
-  sol =createShape(SPHERE,150);
+  sol =createShape(SPHERE,130);
   createPlanet(sol,"data/sol.jpg");
   //Inicializamos mercurio
   mercurio = createShape(SPHERE,20);
@@ -26,11 +27,20 @@ void setup()
   marte = createShape(SPHERE,28);
   createPlanet(marte, "data/marte.jpg");
   //Inicializa Jupiter
-  jupiter = createShape(SPHERE,70);
+  jupiter = createShape(SPHERE,60);
   createPlanet(jupiter, "data/jupiter.jpg");
   //Inicializa Neptuno
   neptuno = createShape(SPHERE,45);
   createPlanet(neptuno, "data/neptuno.jpg");
+  //Inicializamos la luna, satelite de la Tierra
+  luna = createShape(SPHERE,8);
+  createPlanet(luna, "data/luna.png");
+  //Inicializamos los satelites de Jupiter
+  europa = createShape(SPHERE,10);
+  createPlanet(europa, "data/europa.PNG");
+  
+  ganimedes = createShape(SPHERE,16);
+  createPlanet(ganimedes, "data/ganimedes.PNG");
   ang=0;
   angMer=0; angVen = 0; angTierra = 0; angMarte = 0; angJup = 0; angLuna=0; angNep = 0;
   //Inicializamos diferentes posiciones Y
@@ -51,12 +61,12 @@ void draw()
     ang=0;
     
   //Mostramos los planetas del sistema solar
-  showPlanet(0.9,0.1, posYmercurio,mercurio, 0);
-  showPlanet(0.5,0.14,posYvenus,venus,1);
-  showPlanet(0.3, 0.22,posYtierra,tierra,2);
-  showPlanet(0.25, -0.3,posYmarte,marte,3);
-  showPlanet(0.10, 0.4,posYjupiter,jupiter,4);
-  showPlanet(0.05, -0.55,posYneptuno,neptuno,5);
+  showPlanet(0.9,0.10, posYmercurio,mercurio, 0);
+  showPlanet(0.5,0.25,posYvenus,venus,1);
+  showPlanet(0.3, 0.35,posYtierra,tierra,2);
+  showPlanet(0.25, -0.4,posYmarte,marte,3);
+  showPlanet(0.10, -0.5,posYjupiter,jupiter,4);
+  showPlanet(0.05, -0.85,posYneptuno,neptuno,5);
     
 }
 
@@ -74,10 +84,26 @@ void showPlanet(float angOrb, float posX, float posY, PShape planet, int index){
   rotateY(radians(getAngPlanet(index)));
   translate(-width*posX,posY,0);
   shape(planet);
+  if(index == 2){
+    showSatellite(luna, 70, 0, 4, 6);
+  }
+  if(index == 4){
+    showSatellite(europa, 100, 40, -0.5, 7);
+    showSatellite(ganimedes, -100, 0, 1.5, 8);
+  }
   popMatrix();
   
   //Resetea tras giro completo de la orbita
   addAngOrbita(index,angOrb);
+}
+
+void showSatellite(PShape sat, float posX, float posY, float ang, int indexSat){
+  pushMatrix(); //Creamos los satelites
+  rotate(radians(getAngPlanet(indexSat)),0,1,0);
+  translate(0,posY,posX);
+  shape(sat);
+  addAngOrbita(indexSat,ang);
+  popMatrix();
 }
 
 float getAngPlanet(int index){
@@ -95,6 +121,12 @@ float getAngPlanet(int index){
       return angJup;
     case 5:
       return angNep;
+    case 6:
+      return angLuna;
+    case 7:
+      return angEur;
+    case 8:
+      return angGanimedes;
   }
   return res;
 }
@@ -130,6 +162,21 @@ void addAngOrbita(int index, float angOrb){
       angNep=angNep+angOrb;
       if(angNep>360)
         angNep=0;
+      break;
+    case 6:
+      angLuna=angLuna+angOrb;
+      if(angLuna>360)
+        angLuna=0;
+      break;
+    case 7:
+      angEur=angEur+angOrb;
+      if(angEur>360)
+        angEur=0;
+      break;
+    case 8:
+      angGanimedes=angGanimedes+angOrb;
+      if(angGanimedes>360)
+        angGanimedes=0;
       break;
   }
 }
